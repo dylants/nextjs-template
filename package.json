@@ -9,6 +9,11 @@
   "scripts": {
     "build": "next build",
     "check-types": "tsc --noemit",
+    "ci:db:fixtures": "dotenv -c test -- ts-node -r tsconfig-paths/register --compiler-options '{\"module\":\"CommonJS\"}' integration-tests/create-fixtures.ts",
+    "ci:db:migrate-reset": "dotenv -c test -- prisma migrate reset --skip-seed --force",
+    "ci:db:reset": "npm run ci:db:migrate-reset && npm run ci:db:fixtures",
+    "ci:down": "docker compose -f ./integration-tests/docker-compose.yml down",
+    "ci:up": "docker compose -f ./integration-tests/docker-compose.yml up -d",
     "db:migrate": "dotenv -c development -- prisma migrate dev",
     "db:reset": "dotenv -c development -- prisma migrate reset",
     "db:seed": "dotenv -c development -- prisma db seed",
@@ -17,6 +22,8 @@
     "lint": "npm run eslint && npm run check-types",
     "start": "next start",
     "test": "dotenv -c test -- jest",
+    "test:ci": "dotenv -c test -- jest --config ./jest.integration-tests.config.ts --runInBand",
+    "test:ci:watch": "npm run test:ci -- --watch",
     "test:coverage": "dotenv -c test -- jest --config ./jest.all.config.ts --coverage --runInBand",
     "test:watch": "npm run test -- --watch"
   },
