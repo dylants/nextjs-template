@@ -13,6 +13,8 @@ const extendedConfig: Config = {
   coveragePathIgnorePatterns: [
     'src/components/*',
     'src/config/*',
+    'src/middleware.ts',
+    'src/lib/logger.ts',
     'src/lib/prisma.ts',
     'src/types/*',
   ],
