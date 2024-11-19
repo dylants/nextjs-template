@@ -20,6 +20,54 @@ npm install
 
 Configuration for the application is available within the [`src/config/index.ts`](src/config/index.ts) file. See the config file for configuration elements exposed via environment variables.
 
+## Database
+
+This project utilizes [Prisma](https://www.prisma.io/) for its ORM, and expects a PostgreSQL database instance.
+
+The database schema is stored in the [schema.prisma](prisma/schema.prisma) file.
+
+### Setup Postgres
+
+Install PostgreSQL and populate the `.env.*` files with the correct `DATABASE_URL` string to connect to PostgreSQL.
+
+The `DATABASE_URL` should be populated as such:
+
+```
+DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/nextjs-template"
+```
+
+### Run Migrations
+
+To run migrations:
+
+```
+npm run db:migrate
+```
+
+### Create New Migration
+
+To create a new migration (and run it):
+
+```
+npm run db:migrate --name <migration name>
+```
+
+### Seeds
+
+Database seeds are found in the [seeds script directory](prisma/seeds/).
+
+To run the script to generate seed data:
+
+```
+npm run db:seed
+```
+
+Reset the database, re-run migrations, and re-seed the database:
+
+```
+npm run db:reset
+```
+
 ## Tests
 
 ### Lint and Type Checking
