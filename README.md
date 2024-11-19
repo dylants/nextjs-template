@@ -96,6 +96,46 @@ To run tests in watch mode:
 npm run test:watch
 ```
 
+### Integration Tests
+
+Integration tests exist in [`integration-tests`](integration-tests).
+
+The integration tests require a test database. This is setup via Docker Compose, and requires a running Docker instance.
+
+To run the tests:
+
+- Start Docker ([Docker Desktop](https://docs.docker.com/desktop/) is an easy option).
+
+- Start the test database
+
+```
+npm run ci:up
+```
+
+- Migrate and seed the test database
+
+```
+npm run ci:db:reset
+```
+
+- Run the tests
+
+```
+npm run test:ci
+```
+
+To run tests in watch mode:
+
+```
+npm run test:ci:watch
+```
+
+When tests are complete, you can shutdown the test database:
+
+```
+npm run ci:down
+```
+
 ### Code Coverage
 
 To run all the tests and include code coverage, follow the steps above for the specific test types. Then to run the tests:
