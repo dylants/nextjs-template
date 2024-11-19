@@ -6,7 +6,7 @@ import pino, { LoggerOptions } from 'pino';
 const options: LoggerOptions = {
   base: undefined,
   // "silent" to disable logging
-  level: process.env.NODE_ENV === 'test' ? 'silent' : config.log.level,
+  level: config.log.level,
   nestedKey: 'payload',
   timestamp: pino.stdTimeFunctions.isoTime,
 };
