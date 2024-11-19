@@ -7,7 +7,7 @@ on:
 
 jobs:
   lint-and-unit-tests:
-    name: Lint
+    name: Lint and Unit Tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -16,3 +16,5 @@ jobs:
         uses: ./.github/actions/setup-env
       - name: Run lint
         run: npm run lint
+      - name: Run unit tests
+        run: npm test
