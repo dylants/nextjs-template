@@ -13,6 +13,7 @@ const extendedConfig: Config = {
   coveragePathIgnorePatterns: [
     'src/components/*',
     'src/config/*',
+    'src/lib/prisma.ts',
     'src/types/*',
   ],
   testPathIgnorePatterns: ['/node_modules/'],
