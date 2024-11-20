@@ -2,6 +2,7 @@ import { LevelWithSilent } from 'pino';
 
 export type Config = {
   auth: {
+    cookieName: string;
     saltRounds: number;
   };
   headers: {
@@ -14,6 +15,7 @@ export type Config = {
 
 const config: Config = {
   auth: {
+    cookieName: process.env.AUTH_COOKIE_NAME || 'userAuth',
     saltRounds: process.env.SALT_ROUNDS ? Number(process.env.SALT_ROUNDS) : 10,
   },
   headers: {
