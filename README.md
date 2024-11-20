@@ -143,3 +143,13 @@ To run all the tests and include code coverage, follow the steps above for the s
 ```
 npm run test:coverage
 ```
+
+## Storybook
+
+This app uses [Storybook](https://storybook.js.org/) to demo UI components.
+
+To run storybook:
+
+```
+npm run storybook
+```
