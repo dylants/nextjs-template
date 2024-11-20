@@ -15,6 +15,44 @@ import { fromZodError } from 'zod-validation-error';
 
 const authCookieName = config.auth.cookieName;
 
+export type AuthGetResponseBody = {
+  data: Auth;
+};
+
+export async function GET(
+  request: NextRequest,
+): Promise<NextResponse<AuthGetResponseBody | NextResponseErrorBody>> {
+  const logger = getLogger(`${request.nextUrl.pathname} ${request.method}`);
+
+  try {
+    const userId = request.cookies.get(authCookieName)?.value;
+
+    if (!userId) {
+      logger.trace('No userId in auth cookie, returning not logged in');
+      return NextResponse.json({
+        data: { isLoggedIn: false },
+      });
+    }
+
+    const user = await prisma.user.findFirst({ where: { userId } });
+    if (!user) {
+      logger.trace({ userId }, 'No user for userId, returning not logged in');
+      return NextResponse.json({
+        data: { isLoggedIn: false },
+      });
+    }
+
+    return NextResponse.json({
+      data: {
+        email: user.email,
+        isLoggedIn: true,
+      },
+    });
+  } catch (error: unknown) {
+    return handleErrorResponse(error);
+  }
+}
+
 export type AuthPostRequestBody = {
   email: string;
   password: string;
