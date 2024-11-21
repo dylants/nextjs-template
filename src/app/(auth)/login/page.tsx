@@ -4,15 +4,38 @@ import { AuthPostRequestBody } from '@/app/api/auth/route';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import useHandleError from '@/hooks/useHandleError';
+import useLoginError from '@/hooks/useLoginError';
 import { postAuth } from '@/lib/api';
+import UnauthorizedError from '@/lib/errors/UnauthorizedError';
+import LoginError from '@/types/LoginError';
 import useAppContext from 'hooks/useAppContext';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useCallback } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+
+function Error() {
+  const searchParams = useSearchParams();
+  const { parseLoginErrorUrl } = useLoginError();
+
+  const { errorMessage } = parseLoginErrorUrl(searchParams);
+
+  if (!errorMessage) {
+    return;
+  }
+
+  return (
+    <div>
+      <p>{errorMessage}</p>
+    </div>
+  );
+}
 
 export default function LoginPage() {
   const { setAuth } = useAppContext();
   const router = useRouter();
+  const { handleError } = useHandleError();
+  const { buildLoginErrorUrl } = useLoginError();
 
   const {
     formState: { errors },
@@ -32,13 +55,18 @@ export default function LoginPage() {
 
         // TODO navigate back to where they were if this was a redirect
         router.push('/');
-      } catch {
-        // TODO handle error
+      } catch (error) {
+        // handle this case specifically since we know they entered invalid credentials
+        if (error instanceof UnauthorizedError) {
+          return router.push(buildLoginErrorUrl(LoginError.INVALID_LOGIN));
+        }
+
+        return handleError(error);
       } finally {
         reset();
       }
     },
-    [reset, router, setAuth],
+    [buildLoginErrorUrl, handleError, reset, router, setAuth],
   );
 
   return (
@@ -47,6 +75,7 @@ export default function LoginPage() {
         <div className="space-y-2">
           <h1>Login</h1>
         </div>
+        <Error />
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid gap-5">
             <div className="grid gap-2">
