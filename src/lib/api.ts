@@ -1,3 +1,4 @@
+import { AuthPostRequestBody } from '@/app/api/auth/route';
 import UnauthorizedError from '@/lib/errors/UnauthorizedError';
 import Auth from '@/types/Auth';
 
@@ -32,4 +33,17 @@ export async function _api<T>(
 
 export async function getAuth(): Promise<Auth> {
   return _api<Auth>('/api/auth');
+}
+
+export async function postAuth({
+  email,
+  password,
+}: AuthPostRequestBody): Promise<Auth> {
+  return _api<Auth>('/api/auth', {
+    body: JSON.stringify({ email, password }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    method: 'POST',
+  });
 }
