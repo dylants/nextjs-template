@@ -1,8 +1,9 @@
+import AppContextProvider from '@/app/AppContextProvider';
 import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  description: 'Next.js Template',
+  description: '',
   title: 'Next.js Template',
 };
 
@@ -13,7 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <AppContextProvider>{children}</AppContextProvider>
+      </body>
     </html>
   );
 }
