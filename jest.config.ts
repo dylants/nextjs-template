@@ -9,7 +9,10 @@ export const config: Config = {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
   },
-  setupFilesAfterEnv: ['<rootDir>/test-setup/mock-next-headers.setup.ts'],
+  setupFilesAfterEnv: [
+    '<rootDir>/test-setup/fetch-polyfill.setup.ts',
+    '<rootDir>/test-setup/mock-next-headers.setup.ts',
+  ],
   testPathIgnorePatterns: ['/node_modules/', '/integration-tests/'],
 };
 
