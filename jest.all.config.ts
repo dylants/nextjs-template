@@ -14,6 +14,7 @@ const extendedConfig: Config = {
     'src/components/*',
     'src/config/*',
     'src/middleware.ts',
+    'src/lib/api.ts',
     'src/lib/logger.ts',
     'src/lib/prisma.ts',
     'src/types/*',
