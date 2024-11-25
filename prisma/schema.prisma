@@ -19,4 +19,18 @@ model User {
   userId       String @unique @default(nanoid(20))
   email        String @unique
   passwordHash String
+
+  widgets Widget[]
+}
+
+model Widget {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @db.Timestamptz(3)
+
+  widgetId String @unique @default(nanoid(20))
+  name     String
+
+  userId String
+  user   User   @relation(fields: [userId], references: [userId], onDelete: Cascade)
 }
