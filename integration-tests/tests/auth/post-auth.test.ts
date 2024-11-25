@@ -3,7 +3,7 @@ import projectConfig from '@/config/index';
 import prisma from '@/lib/prisma';
 import User from '@/types/User';
 import { NextRequest } from 'next/server';
-import { EMAIL, PASSWORD } from '../../fixtures/user.fixture';
+import { PASSWORD, USER_WITH_WIDGETS_EMAIL } from '../../fixtures/user.fixture';
 
 const mockSetCookies = jest.fn();
 jest.mock('next/headers', () => ({
@@ -18,7 +18,7 @@ jest.mock('next/headers', () => ({
 const url = 'https://localhost';
 
 const USER = {
-  email: EMAIL,
+  email: USER_WITH_WIDGETS_EMAIL,
   password: PASSWORD,
 };
 
