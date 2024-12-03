@@ -42,6 +42,11 @@ export default function Home() {
                 Login Page (unprotected)
               </p>
             </NavLink>
+            <NavLink path="/widgets">
+              <p className="whitespace-normal break-normal">
+                Widgets Page (protected)
+              </p>
+            </NavLink>
           </div>
         </div>
       </main>

@@ -15,7 +15,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex h-screen w-screen items-center justify-center">
-        <AppContextProvider>{children}</AppContextProvider>
+        <AppContextProvider>
+          <main className="flex flex-col flex-1 md:items-center mb-12">
+            <div className="w-full h-full px-4 md:w-[768px] md:px-0">
+              {children}
+            </div>
+          </main>
+        </AppContextProvider>
       </body>
     </html>
   );

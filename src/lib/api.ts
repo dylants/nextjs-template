@@ -1,6 +1,7 @@
 import { AuthPostRequestBody } from '@/app/api/auth/route';
 import UnauthorizedError from '@/lib/errors/UnauthorizedError';
 import Auth from '@/types/Auth';
+import Widget from '@/types/Widget';
 
 /**
  * Wrapper around fetch, expecting and returning a JSON typed response
@@ -46,4 +47,12 @@ export async function postAuth({
     },
     method: 'POST',
   });
+}
+
+// *************************************************************
+// ************************ WIDGETS ***************************
+// *************************************************************
+
+export async function getWidgets(): Promise<Widget[]> {
+  return _api<Widget[]>('/api/protected/widgets');
 }
