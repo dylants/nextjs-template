@@ -18,6 +18,7 @@ export async function GET(
     const widgets = await prisma.widget.findMany({
       select: {
         createdAt: true,
+        description: true,
         name: true,
         updatedAt: true,
         widgetId: true,

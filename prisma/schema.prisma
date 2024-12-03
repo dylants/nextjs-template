@@ -28,8 +28,9 @@ model Widget {
   createdAt DateTime @default(now()) @db.Timestamptz(3)
   updatedAt DateTime @updatedAt @db.Timestamptz(3)
 
-  widgetId String @unique @default(nanoid(20))
-  name     String
+  widgetId    String @unique @default(nanoid(20))
+  name        String
+  description String
 
   userId String
   user   User   @relation(fields: [userId], references: [userId], onDelete: Cascade)

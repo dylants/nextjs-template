@@ -68,6 +68,16 @@ Reset the database, re-run migrations, and re-seed the database:
 npm run db:reset
 ```
 
+#### Seed Configuration
+
+The following environment variables are available to set specifics:
+
+Number of Widgets to create (defaults to 10):
+
+```
+SEED_NUM_WIDGETS=10
+```
+
 ## Tests
 
 ### Lint and Type Checking

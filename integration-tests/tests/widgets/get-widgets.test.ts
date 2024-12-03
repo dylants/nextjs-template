@@ -23,6 +23,7 @@ describe('/api/protected/widgets GET Integration Test', () => {
       widgets = await prisma.widget.findMany({
         select: {
           createdAt: true,
+          description: true,
           name: true,
           updatedAt: true,
           widgetId: true,
