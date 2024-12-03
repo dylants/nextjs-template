@@ -16,6 +16,9 @@ export async function GET(
     const session = await authMiddleware(request);
 
     const widgets = await prisma.widget.findMany({
+      orderBy: {
+        id: 'asc',
+      },
       select: {
         createdAt: true,
         description: true,
