@@ -12,9 +12,9 @@ const userFixtures: Prisma.UserCreateInput[] = [
     widgets: {
       createMany: {
         data: [
-          { name: 'Widget 1' },
-          { name: 'Widget 2' },
-          { name: 'Widget 3' },
+          { description: 'Description 1', name: 'Widget 1' },
+          { description: 'Description 2', name: 'Widget 2' },
+          { description: 'Description 3', name: 'Widget 3' },
         ],
       },
     },
