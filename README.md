@@ -78,6 +78,64 @@ Number of Widgets to create (defaults to 10):
 SEED_NUM_WIDGETS=10
 ```
 
+## Run in production environment (Docker)
+
+This application is designed to run in production using Docker. The following steps outline the process.
+
+### Build Docker Image
+
+To build the Docker image:
+
+```
+npm run prod:build
+```
+
+Login to Github Container Registry with Personal Access Token (requires write)
+```
+docker login ghcr.io -u <username>
+<enter token>
+```
+
+Push the tagged image to GitHub Container Registry
+```
+docker push ghcr.io/dylants/nextjs-template:<tag>
+```
+
+### Run Migrations
+
+Run the migrations on the production database:
+
+```
+npm run prod:db:migrate
+```
+
+### Run Docker Container
+
+On production machine:
+
+Login to Github Container Registry with Personal Access Token (requires read)
+```
+docker login ghcr.io -u <username>
+<enter token>
+```
+
+Pull the image:
+```
+docker pull ghcr.io/dylants/nextjs-template:<tag>
+```
+
+Define the environment variables in the `.env.production` file. See the [docker-compose.prod.yml](docker-compose.prod.yml) file for specifics.
+
+Start the app:
+```
+npm run prod:up
+```
+
+Stop the app:
+```
+npm run prod:down
+```
+
 ## Tests
 
 ### Lint and Type Checking
