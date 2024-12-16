@@ -34,8 +34,9 @@ function Error() {
 export default function LoginPage() {
   const { setAuth } = useAppContext();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { handleError } = useHandleError();
-  const { buildLoginErrorUrl } = useLoginError();
+  const { parseReturnUrl, updateLoginError } = useLoginError();
 
   const {
     formState: { errors },
@@ -53,12 +54,14 @@ export default function LoginPage() {
 
         setAuth(auth);
 
-        // TODO navigate back to where they were if this was a redirect
-        router.push('/');
+        const { returnUrl } = parseReturnUrl(searchParams);
+        router.push(returnUrl || '/');
       } catch (error) {
         // handle this case specifically since we know they entered invalid credentials
         if (error instanceof UnauthorizedError) {
-          return router.push(buildLoginErrorUrl(LoginError.INVALID_LOGIN));
+          return router.push(
+            updateLoginError(LoginError.INVALID_LOGIN, searchParams),
+          );
         }
 
         return handleError(error);
@@ -66,7 +69,15 @@ export default function LoginPage() {
         reset();
       }
     },
-    [buildLoginErrorUrl, handleError, reset, router, setAuth],
+    [
+      handleError,
+      parseReturnUrl,
+      reset,
+      router,
+      searchParams,
+      setAuth,
+      updateLoginError,
+    ],
   );
 
   return (
