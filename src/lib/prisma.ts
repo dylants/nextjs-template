@@ -4,6 +4,7 @@ import { PrismaClient } from '@prisma/client';
 
 const prismaClientSingleton = () => {
   return new PrismaClient({
+    // https://www.prisma.io/docs/orm/prisma-client/queries/excluding-fields
     omit: {
       user: {
         passwordHash: true,
