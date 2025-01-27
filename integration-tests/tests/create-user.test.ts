@@ -23,15 +23,15 @@ describe('Create User Integration Test', () => {
       },
     });
 
-    const { email, userId } = createdUser;
+    const { email, id } = createdUser;
     expect(email).toEqual(USER_EMAIL);
-    expect(userId).toBeDefined();
+    expect(id).toBeDefined();
 
     const foundUser = await prisma.user.findFirst({
       select: {
         email: true,
+        id: true,
         passwordHash: true,
-        userId: true,
       },
       where: { email: USER_EMAIL },
     });
@@ -43,7 +43,7 @@ describe('Create User Integration Test', () => {
         password: USER_PASSWORD,
       }),
     ).toEqual(true);
-    expect(foundUser?.userId).toEqual(userId);
+    expect(foundUser?.id).toEqual(id);
   });
 
   it('should disallow creating a user with the same email twice', async () => {

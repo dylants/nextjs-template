@@ -34,7 +34,7 @@ export async function GET(
       });
     }
 
-    const user = await prisma.user.findFirst({ where: { userId } });
+    const user = await prisma.user.findFirst({ where: { id: userId } });
     if (!user) {
       logger.trace({ userId }, 'No user for userId, returning not logged in');
       return NextResponse.json({
@@ -88,8 +88,8 @@ export async function POST(
     const user = await prisma.user.findFirst({
       select: {
         email: true,
+        id: true,
         passwordHash: true,
-        userId: true,
       },
       where: { email },
     });
@@ -109,7 +109,7 @@ export async function POST(
 
     logger.trace({ email }, 'Valid login auth');
     const cookieStore = cookies();
-    cookieStore.set(authCookieName, user.userId);
+    cookieStore.set(authCookieName, user.id);
 
     return NextResponse.json({
       data: {

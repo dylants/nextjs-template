@@ -1,7 +1,7 @@
 import config from '@/config/index';
 import authMiddleware from '@/lib/auth-middleware';
 import UnauthorizedError from '@/lib/errors/UnauthorizedError';
-import { fakePrismaUser } from '@/lib/fakes/user.fake';
+import { fakeUser } from '@/lib/fakes/user.fake';
 import prisma from '@/lib/prisma';
 import { NextRequest } from 'next/server';
 
@@ -15,11 +15,11 @@ describe('src/lib/auth-middleware', () => {
     mockFind.mockReset();
   });
 
-  const user1 = fakePrismaUser();
+  const user1 = fakeUser();
 
   it('should return the user with a valid cookie', async () => {
     const request = new NextRequest(url);
-    request.cookies.set(authCookieName, user1.userId);
+    request.cookies.set(authCookieName, user1.id);
     mockFind.mockResolvedValue(user1);
 
     expect(await authMiddleware(request)).toEqual({
