@@ -4,8 +4,8 @@ import { Prisma } from '@prisma/client';
 import _ from 'lodash';
 
 export async function generateWidgets(numWidgets: number) {
-  const { userId } = await prisma.user.findFirstOrThrow({
-    select: { userId: true },
+  const { id: userId } = await prisma.user.findFirstOrThrow({
+    select: { id: true },
     where: { email: 'test@fake.com' },
   });
 

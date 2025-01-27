@@ -20,7 +20,7 @@ export default async function authMiddleware(
   }
 
   const user = await prisma.user.findFirst({
-    where: { userId },
+    where: { id: userId },
   });
   if (!user) {
     throw new UnauthorizedError();

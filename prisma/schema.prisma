@@ -10,11 +10,10 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(cuid(2))
   createdAt DateTime @default(now()) @db.Timestamptz(3)
   updatedAt DateTime @updatedAt @db.Timestamptz(3)
 
-  userId       String @unique @default(nanoid(20))
   email        String @unique
   passwordHash String
 
@@ -22,14 +21,13 @@ model User {
 }
 
 model Widget {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(cuid(2))
   createdAt DateTime @default(now()) @db.Timestamptz(3)
   updatedAt DateTime @updatedAt @db.Timestamptz(3)
 
-  widgetId    String @unique @default(nanoid(20))
   name        String
   description String
 
   userId String
-  user   User   @relation(fields: [userId], references: [userId], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

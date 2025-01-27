@@ -37,6 +37,7 @@
     "seed": "ts-node -r tsconfig-paths/register --compiler-options {\"module\":\"CommonJS\"} prisma/seeds/run-seeds.ts"
   },
   "dependencies": {
+    "@paralleldrive/cuid2": "2.2.2",
     "@prisma/client": "6.2.1",
     "@radix-ui/react-label": "2.1.0",
     "@radix-ui/react-slot": "1.1.0",
@@ -46,7 +47,6 @@
     "clsx": "2.1.1",
     "lodash": "4.17.21",
     "lucide-react": "0.460.0",
-    "nanoid": "5.0.8",
     "next": "14.2.23",
     "pino": "9.5.0",
     "react": "18.3.1",

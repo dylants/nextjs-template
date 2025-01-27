@@ -1,11 +1,11 @@
 import projectConfig from '@/config/index';
-import { nanoid } from 'nanoid';
+import { createId } from '@paralleldrive/cuid2';
 import { NextResponse } from 'next/server';
 
 export function middleware() {
   return NextResponse.next({
     headers: {
-      [projectConfig.headers.requestId]: nanoid(),
+      [projectConfig.headers.requestId]: createId(),
     },
   });
 }

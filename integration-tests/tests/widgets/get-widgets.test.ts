@@ -21,14 +21,17 @@ describe('/api/protected/widgets GET Integration Test', () => {
         where: { email: USER_WITH_WIDGETS_EMAIL },
       });
       widgets = await prisma.widget.findMany({
+        orderBy: {
+          id: 'asc',
+        },
         select: {
           createdAt: true,
           description: true,
+          id: true,
           name: true,
           updatedAt: true,
-          widgetId: true,
         },
-        where: { userId: user.userId },
+        where: { userId: user.id },
       });
     });
 

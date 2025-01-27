@@ -22,11 +22,11 @@ export async function GET(
       select: {
         createdAt: true,
         description: true,
+        id: true,
         name: true,
         updatedAt: true,
-        widgetId: true,
       },
-      where: { userId: session.user.userId },
+      where: { userId: session.user.id },
     });
 
     return NextResponse.json({ data: widgets });
